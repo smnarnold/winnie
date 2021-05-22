@@ -8,3 +8,5 @@ Winnie le caca, tsé genre le meme
 - `text`: permet d'ajouter du texte, duhhh.
 - `img`: permet d'ajouter l'url d'une image, préférablement dans le dossier `img/memes`.
 - `source`: permet d'indiquer l'origine du mémé, pcq tsé volé c'est pas beau!
+
+Big up à tous le monde sur [r/Quebec](https://www.reddit.com/r/Quebec/) pour le contenu!
