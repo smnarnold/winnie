@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-family: helvetica, arial, sans-serif;
+}
+
+.st0 {
+  fill: #ff5700;
+}
+
+.st1 {
+  fill: #ff4500;
+}
+
+.st4 {
+  fill: #d1e7f8;
+}
+
+.st5 {
+  fill: #b9d8f4;
+}
+
+.st6 {
+  fill: #a5001e;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 3vmin;
+  text-align: center;
+  padding: 3vmin;
+}
+
+label {
+  padding: 1vmin;
+}
+
+.meme {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: #fff;
+  color: #000;
+  width: 100vmin;
+  height: 48.92vmin;
+  text-align: center;
+  font-size: 5vmin;
+}
+
+.cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+}
+
+.image.no1 {
+  background-image: url(img/standard-1.jpg);
+}
+
+.image.no2 {
+  background-image: url(img/standard-2.jpg);
+}
+
+.is-hd .image.no1 {
+  background-image: url(img/hd-1.jpg);
+}
+.is-hd .image.no2 {
+  background-image: url(img/hd-2.jpg);
+}
+
+.is-4k .image.no1 {
+  background-image: url(img/4k-1.jpg);
+}
+.is-4k .image.no2 {
+  background-image: url(img/4k-2.jpg);
+}
+
+.cell {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5vmin;
+}
+
+.buttons-bar button {
+  font-size: 3vmin;
+}
+.buttons-bar svg {
+  height: 2.5vmin;
+}
+
+.random {
+  margin: 5vmin 0;
+}
+
+.source {
+  width: 100vmin;
+  display: flex;
+  align-items: center;
+  font-size: 3vmin;
+  margin-bottom: -3vmin;
+}
+
+.sauce-icon {
+  flex: 0 0 auto;
+  position: relative;
+  margin-top: -2vmin;
+  width: 10vmin;
+  transform: rotate(-10deg);
+}
+
+.url {
+  display: block;
+  color: #ff5700;
+  padding: 0.5vmin;
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.url:hover {
+  text-decoration: underline;
+}
