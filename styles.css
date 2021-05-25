@@ -73,27 +73,12 @@ label {
   background-size: cover;
 }
 
-.image.no1 {
-  background-image: url(img/standard-1.jpg);
-}
-
-.image.no2 {
-  background-image: url(img/standard-2.jpg);
-}
-
-.is-hd .image.no1 {
-  background-image: url(img/hd-1.jpg);
-}
-.is-hd .image.no2 {
-  background-image: url(img/hd-2.jpg);
-}
-
-.is-4k .image.no1 {
-  background-image: url(img/4k-1.jpg);
-}
-.is-4k .image.no2 {
-  background-image: url(img/4k-2.jpg);
-}
+.image.no1 { background-image: url(img/standard-1.webp); }
+.image.no2 { background-image: url(img/standard-2.webp); }
+.is-hd .image.no1 { background-image: url(img/hd-1.webp); }
+.is-hd .image.no2 { background-image: url(img/hd-2.webp); }
+.is-4k .image.no1 { background-image: url(img/4k-1.webp); }
+.is-4k .image.no2 { background-image: url(img/4k-2.webp); }
 
 .cell {
   position: relative;
