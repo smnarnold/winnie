@@ -15,7 +15,7 @@ class Winnie {
     this.index = 0;
     this.resolution = ''; // standard
 
-    fetch('./memes.json')
+    fetch('/memes.json')
     .then(res => res.json())
     .then(data => {
       this.memesArr = data;
@@ -35,11 +35,15 @@ class Winnie {
     this.path = window.location.pathname.substring(1);
 
     if (this.path !== '') {
-      let hash = window.location.hash;
-      if (hash) {
-        this.path = this.path.replace(hash, "");
-        hash = hash.substring(1);
-        this.changeResolution(hash, true);
+      const slashIndex = this.path.indexOf('/');
+
+      if (slashIndex !== -1) {
+        let urlParts = this.path.split("/");
+        this.path = urlParts[0];
+        const resolution = urlParts[1];
+        // this.path = this.path.replace(hash, "");
+        //hash = hash.substring(1);
+        this.changeResolution(resolution, true);
       }
 
       this.index = this.memesArr.findIndex(obj => obj.slug === this.path);
@@ -71,6 +75,7 @@ class Winnie {
     }
     
     if (updateRadio) {
+      console.log(resolution)
       document.querySelector(`input[value="${resolution}"]`).checked = true;
     } else {
       this.updateURL();
@@ -99,7 +104,7 @@ class Winnie {
     }
 
     if(this.resolution) {
-      url += `#${this.resolution}`;
+      url += `/${this.resolution}`;
     }
 
     if (this.obj.no1.text) {

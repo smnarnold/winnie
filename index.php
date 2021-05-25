@@ -1,3 +1,45 @@
+<?php
+$domain = "https://winnie.smnarnold.com";
+$url = $domain;
+$uri = substr($_SERVER[REQUEST_URI], 1);
+$uriParts = explode('/', $uri);
+$slug = $uriParts[0];
+
+if ($slug) {
+  $url .= $uri;
+}
+
+$resolution = $uriParts[1];
+$opengraph = $domain . "/img/opengraph.jpg";
+
+if($resolution) {
+  $opengraph = $domain . "/img/opengraph-" . $resolution . ".jpg";
+}
+
+$strJson = file_get_contents("memes.json");
+$json = json_decode($strJson);
+$title = "Winnie le caca 💩";
+$text1 = '';
+$text2 = '';
+$img2 = '';
+$source = '';
+
+foreach ($json as $obj) {
+  if ($obj->slug == $slug) {
+    $text1 = $obj->no1->text;
+    $title = "Winnie le caca 💩 | " . $text1;
+
+    if ($obj->no2->text) {
+      $text2 = $obj->no2->text;
+    } elseif ($obj->no2->img) {
+      $img2 = $obj->no2->img;
+    }
+
+    $source = $obj->source;
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,31 +57,31 @@
   <meta name="theme-color" content="#f52532">
 
   <!-- Primary Meta Tags -->
-  <title>Winnie le caca 💩</title>
-  <meta name="title" content="Winnie le caca 💩">
-  <meta name="description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle, mais surtout typiquement nous!">
+  <title><?php echo $title ?></title>
+  <meta name="title" content="<?php echo $title ?>">
+  <meta name="description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle.">
   <meta name="author" content="Simon Arnold">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Winnie le caca">
-  <meta property="og:url" content="https://winnie.smnarnold.com">
+  <meta property="og:site_name" content="<?php echo $title ?>">
+  <meta property="og:url" content="<?php echo $url ?>">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Winnie le caca 💩">
-  <meta property="og:description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle, mais surtout typiquement nous!">
-  <meta property="og:image" content="/img/opengraph.jpg">
+  <meta property="og:title" content="<?php echo $title ?>">
+  <meta property="og:description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle.">
+  <meta property="og:image" content="<?php echo $opengraph ?>">
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:creator" content="@smnarnold">
-  <meta property="twitter:url" content="https://winnie.smnarnold.com">
-  <meta property="twitter:title" content="Winnie le caca 💩">
-  <meta property="twitter:description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle, mais surtout typiquement nous!">
-  <meta property="twitter:image" content="/img/opengraph.jpg">
+  <meta property="twitter:url" content="<?php echo $url ?>">
+  <meta property="twitter:title" content="<?php echo $title ?>">
+  <meta property="twitter:description" content="Le joual québécois à son meilleur. Parfois poétique, souvent drôle.">
+  <meta property="twitter:image" content="<?php echo $opengraph ?>">
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WLX8F05HW7"></script>
@@ -54,26 +96,26 @@
 <body>
   <nav class="nav">
     <label>
-      <input type="radio" name="resolution" value="standard" checked /> Standard
+      <input type="radio" name="resolution" value="standard" <?php if(!$resolution) { echo "checked"; } ?> /> Standard
     </label>
     
     <label>
-      <input type="radio" name="resolution" value="hd" /> HD
+      <input type="radio" name="resolution" value="hd" <?php if($resolution == "hd") { echo "checked"; } ?> /> HD
     </label>
     
     <label>
-      <input type="radio" name="resolution" value="4k" /> 4K
+      <input type="radio" name="resolution" value="4k" <?php if($resolution == "4k") { echo "checked"; } ?> /> 4K
     </label>
   </nav>
   
-  <div class="meme">
+  <div class="meme <?php if($resolution) { echo "is-" . $resolution; } ?>">
     <div class="cell image no1"></div>
     <div class="cell text no1">
-      Où est-il?
+      <?php echo $text1; ?>
     </div>
     <div class="cell image no2"></div>
-    <div class="cell text no2">
-      Oussékilé?
+    <div class="cell text no2" <?php if($img2) { echo "style='background-image: url(" . $img2 . ");'"; } ?>>
+    <?php echo $text2; ?>
     </div>
   </div>
   
@@ -97,7 +139,7 @@
       <path class="st0" d="M293.69 362.66c0-4.58-3.74-8.31-8.35-8.31-2.25 0-4.28.9-5.78 2.34-5.69-3.74-13.38-6.12-21.9-6.43l4.66-14.67 12.62 2.96-.02.18c0 3.75 3.06 6.79 6.83 6.79 3.76 0 6.82-3.05 6.82-6.79s-3.06-6.8-6.82-6.8c-2.89 0-5.35 1.8-6.35 4.33l-13.6-3.19c-.59-.14-1.2.2-1.38.78l-5.2 16.36c-8.91.11-16.99 2.51-22.93 6.36-1.49-1.38-3.46-2.24-5.65-2.24-4.6 0-8.34 3.73-8.34 8.31 0 3.05 1.67 5.69 4.14 7.13-.16.89-.27 1.78-.27 2.69 0 12.29 15.1 22.28 33.67 22.28s33.67-10 33.67-22.28c0-.86-.09-1.71-.24-2.54 2.62-1.38 4.42-4.1 4.42-7.26zm-54.1 5.71c0-2.73 2.23-4.95 4.97-4.95s4.97 2.22 4.97 4.95-2.23 4.94-4.97 4.94-4.97-2.22-4.97-4.94zm28.46 14.66c-2.5 2.49-6.43 3.7-12.01 3.7l-.04-.01-.04.01c-5.58 0-9.51-1.21-12.01-3.7-.46-.45-.46-1.19 0-1.64.46-.46 1.2-.46 1.65 0 2.04 2.03 5.43 3.02 10.36 3.02l.04.01.04-.01c4.93 0 8.32-.99 10.36-3.02.46-.46 1.2-.45 1.65 0 .45.45.45 1.19 0 1.64zm-.59-9.72c-2.74 0-4.97-2.22-4.97-4.94 0-2.73 2.23-4.95 4.97-4.95 2.74 0 4.97 2.22 4.97 4.95-.01 2.72-2.24 4.94-4.97 4.94z"/>
     </svg>
   
-    Sauce: <a class="url" target="_blank"></a>
+    Sauce: <a class="url" target="_blank"><?php echo $source; ?></a>
   </div>
   
   <div class="buttons-bar">
@@ -116,6 +158,6 @@
   <a class="href-download"></a>
 
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
